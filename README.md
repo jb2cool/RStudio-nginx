@@ -12,8 +12,7 @@ We will:
 
 
 Once complete you'll have:
-* nginx default home page being served on port 80 (http://127.0.0.1)
-* RStudio Server being served on port 8787 and also as a virtual directory (http://127.0.0.1:8787 & http://127.0.0.1/rstudio)
+* RStudio Server being served on port 8787 and also as a redirect on port 80 (http://127.0.0.1:8787 & http://127.0.0.1)
 
 ## Instructions
 ### Installation
