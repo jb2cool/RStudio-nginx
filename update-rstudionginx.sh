@@ -1,5 +1,5 @@
 #!/bin/bash
-# Update R/RStudio Server/Shiny Server/nginx on Ubuntu
+# Update R/RStudio Server/nginx on Ubuntu
 
 # Update repository list and install R
 sudo apt-get update && sudo apt-get install r-base r-base-dev -y
@@ -23,10 +23,3 @@ rm rstudio-latest.deb
 
 # Update nginx
 sudo apt-get install nginx -y
-
-# Update to latest version of Shiny Server
-sudo apt-get install curl -y
-VERSION=$(curl https://download3.rstudio.org/ubuntu-18.04/x86_64/VERSION)
-wget --no-verbose "https://download3.rstudio.org/ubuntu-18.04/x86_64/shiny-server-$VERSION-amd64.deb" -O shiny-server-latest.deb
-sudo gdebi -n shiny-server-latest.deb
-rm shiny-server-latest.deb
