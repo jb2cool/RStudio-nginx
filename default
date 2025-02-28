@@ -45,3 +45,4 @@ server {
         proxy_read_timeout 20d;
         client_max_body_size 0;
         }
+}
