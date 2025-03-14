@@ -41,9 +41,7 @@ sudo apt-get install nginx -y
 sudo wget https://raw.githubusercontent.com/jb2cool/RStudio-nginx/main/default -O /etc/nginx/sites-enabled/default
 
 # Restart services
-sudo systemctl daemon-reload
-sudo systemctl restart nginx
-sudo systemctl enable nginx
+sudo systemctl reload nginx
 
 # Clean up install script
 rm install-rstudionginx.sh
