@@ -9,7 +9,7 @@ LOG_FILE="install-rstudionginx.log"
 log() {
     echo "[INFO] $1" | tee -a "$LOG_FILE"
 }
-log "Starting installation of R and NGINX..."
+log "Starting installation of R and nginx"
 
 # Add CRAN repository to APT sources
 log "Adding CRAN repository"
