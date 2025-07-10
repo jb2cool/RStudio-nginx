@@ -1,7 +1,18 @@
 #!/bin/bash
 # Install R/RStudio Server/nginx on Ubuntu
 
-# Add repository to APT sources
+# Exit on error
+set -e
+
+# Logging function
+LOG_FILE="install-rstudionginx.log"
+log() {
+    echo "[INFO] $1" | tee -a "$LOG_FILE"
+}
+log "Starting installation of R and NGINX..."
+
+# Add CRAN repository to APT sources
+log "Adding CRAN repository"
 if [[ $(lsb_release -is) == "Ubuntu" ]]
 then
     echo "Linux distribution is Ubuntu, proceeding to add R repository to APT"
@@ -11,14 +22,18 @@ else
     exit 1
 fi
 
-# Add repo key
+# Add CRAN repository key
+log "Adding CRAN repository key"
 wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
 # Update repository list and install R
+log "Installing R base"
 sudo apt-get update && sudo apt-get install r-base r-base-dev -y
 
 # Install RStudio Server
+log "Installing prerequisite package for RStudio Server"
 sudo apt-get install gdebi-core -y
+log "Downloading RStudio Server"
 if [[ $(lsb_release -rs) == "20.04" ]]
 then
     wget https://www.rstudio.org/download/latest/stable/server/focal/rstudio-server-latest-amd64.deb  -O rstudio-latest.deb
@@ -31,22 +46,31 @@ then
 else
     echo "Non-compatible version"
 fi
+log "Installing RStudio Server"
 sudo gdebi --non-interactive rstudio-latest.deb
+log "Cleaning up RStudio Server"
 rm rstudio-latest.deb
 
 # Install nginx
+log "Installing nginx"
 sudo apt-get install nginx -y
 
 # Configure nginx with RStudio Server redirect
+log "Backing up default nginx config..."
+cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak
+log "Downloading prebuilt nginx configuration file"
 sudo wget https://raw.githubusercontent.com/jb2cool/RStudio-nginx/main/default -O /etc/nginx/sites-enabled/default
 
 # Restart services
+log "Restarting nginx"
 sudo systemctl reload nginx
 
 # Clean up install script
+log "Cleaning up install script"
 rm install-rstudionginx.sh
 
 # Tell user everything works
+log "Tell user everything works"
 echo ""
 echo ""
 echo "###############################################################################"
@@ -54,3 +78,7 @@ echo "# RStudio Server is now available on http://127.0.0.1:8787 & http://127.0.
 echo "###############################################################################"
 echo ""
 echo ""
+
+# Clean up install log
+log "Cleaning up install log"
+rm install-rstudionginx.log
