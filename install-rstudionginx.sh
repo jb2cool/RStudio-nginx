@@ -41,7 +41,6 @@ rm rstudio-latest.deb
 sudo apt-get install nginx -y
 
 # Configure nginx with RStudio Server redirect
-sudo cp /etc/nginx/sites-enabled/default /etc/nginx/sites-enabled/default.bak
 sudo wget https://raw.githubusercontent.com/jb2cool/RStudio-nginx/main/default -O /etc/nginx/sites-enabled/default
 
 # Restart services
