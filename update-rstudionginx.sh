@@ -12,7 +12,7 @@ log() {
     timestamp=$(date +"%Y-%m-%d %H:%M:%S")
     echo "[$timestamp] $1" | tee -a "$LOG_FILE"
 }
-log "Starting update of R, RStudio Server, and nginx..."
+log "Starting update of R, RStudio Server and nginx..."
 
 # Update repository list and install R
 log "Updating R..."
@@ -35,6 +35,7 @@ else
 fi
 log "Updating RStudio Server..."
 sudo gdebi --non-interactive rstudio-latest.deb
+log "Cleaning up RStudio Server..."
 rm rstudio-latest.deb
 
 # Update nginx
