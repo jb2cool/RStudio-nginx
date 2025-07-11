@@ -80,4 +80,5 @@ echo ""
 echo ""
 
 # Cleaning up logging
+echo "If you made it this far you probably don't need to keep the installation log file"
 rm -i $LOG_FILE
