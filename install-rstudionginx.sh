@@ -80,4 +80,4 @@ echo ""
 echo ""
 
 # Cleaning up logging
-rm $LOG_FILE
+rm -i $LOG_FILE
