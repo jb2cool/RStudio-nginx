@@ -5,14 +5,13 @@
 set -e
 
 # Setting up logging
-LOG_FILE="~/install-rstudionginx.log"
+LOG_FILE=$HOME/install-rstudionginx.log
 touch "$LOG_FILE" || { echo "Cannot write to log file: $LOG_FILE"; exit 1; }
 log() {
-    local timestamp
-    timestamp=$(date +"%Y-%m-%d %H:%M:%S")
-    echo "[$timestamp] $1" | tee -a "$LOG_FILE"
+    local timestamp
+    timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+    echo "[$timestamp] $1" | tee -a "$LOG_FILE"
 }
-
 log "Starting installation of R, Shiny Server, and nginx..."
 
 # Add CRAN repository to APT sources
