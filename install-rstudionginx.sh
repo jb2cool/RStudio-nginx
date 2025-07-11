@@ -12,7 +12,7 @@ log() {
     timestamp=$(date +"%Y-%m-%d %H:%M:%S")
     echo "[$timestamp] $1" | tee -a "$LOG_FILE"
 }
-log "Starting installation of R, RStudio Server, and nginx..."
+log "Starting installation of R, RStudio Server and nginx..."
 
 # Add CRAN repository to APT sources
 log "Adding CRAN repository..."
@@ -51,6 +51,7 @@ else
 fi
 log "Installing RStudio Server..."
 sudo gdebi --non-interactive rstudio-latest.deb
+log "Cleaning up RStudio Server..."
 rm rstudio-latest.deb
 
 # Install nginx
@@ -58,7 +59,7 @@ log "Installing nginx..."
 sudo apt-get install nginx -y
 
 # Configure nginx with RStudio Server redirect
-log "Downlkoading and installing pre-configured nginx config..."
+log "Downloading and installing pre-configured nginx config..."
 sudo wget https://raw.githubusercontent.com/jb2cool/RStudio-nginx/main/default -O /etc/nginx/sites-enabled/default
 
 # Restart services
