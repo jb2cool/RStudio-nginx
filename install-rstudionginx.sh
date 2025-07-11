@@ -31,7 +31,7 @@ log "Adding CRAN repository key..."
 wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
 
 # Update repository list and install R
-log "Installing R base..."
+log "Installing R..."
 sudo apt-get update && sudo apt-get install r-base r-base-dev -y
 
 # Install RStudio Server
