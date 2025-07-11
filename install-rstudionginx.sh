@@ -12,7 +12,7 @@ log() {
     timestamp=$(date +"%Y-%m-%d %H:%M:%S")
     echo "[$timestamp] $1" | tee -a "$LOG_FILE"
 }
-log "Starting installation of R, Shiny Server, and nginx..."
+log "Starting installation of R, RStudio Server, and nginx..."
 
 # Add CRAN repository to APT sources
 log "Adding CRAN repository..."
